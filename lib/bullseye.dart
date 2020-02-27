@@ -1,4 +1,5 @@
-////This is a demo of dart
+//////This is a demo of dart
+
 ////About billy the bully and his sucky personality
 //class Bully{
 //  String name;
@@ -13,18 +14,30 @@
 //
 //}
 
-greet(String name) {
-  print("Hello, $name");
-}
 
-class MyClass {
-  greetAgain({ Function f, String n = "human" }) {
-    f(n);
-  }
+////About named parameters
+//greet(String name) {
+//  print("Hello, $name");
+//}
+//
+//class MyClass {
+//  greetAgain({ Function f, String n = "human" }) {
+//    f(n);
+//  }
+//}
+//main() {
+//  MyClass mc = new MyClass();
+//  greet("Frank");
+//  mc.greetAgain( f : greet, n : "Traci" );
+//  mc.greetAgain( f : greet);
+//}
+
+//About generators using synchronous methods
+Iterable<int> countTo(int num) sync*{
+  int i = 0;
+  while (i <= num) yield i++;
 }
-main() {
-  MyClass mc = new MyClass();
-  greet("Frank");
-  mc.greetAgain( f : greet, n : "Traci" );
-  mc.greetAgain( f : greet);
+main(){
+  Iterator it = countTo(10).iterator;
+  while(it.moveNext()) print(it.current);
 }
