@@ -27,34 +27,16 @@ class MyApp extends StatelessWidget {
           appBar: AppBar(
             title: Text('Still runnin....'),
           ),
-          body: ListView.separated(
-            itemCount: 10,
-            separatorBuilder: (context, index) => Divider(height: 70, thickness: 10, color: Colors.deepOrangeAccent,),
-            itemBuilder: (context, index) {
-              return HomePage(index: index,);
-            },
-          )
-          // Column(
-          //   mainAxisAlignment: MainAxisAlignment.spaceAround, // Align vertically
-          //   children:  [
-          //       Row(
-          //           mainAxisAlignment: MainAxisAlignment.spaceAround, // Align horizontally
-          //           children: [
-          //               HomePage(),
-          //               HomePage(),
-          //           ]
-          //       ),
-          //       Row(
-          //           mainAxisAlignment: MainAxisAlignment.spaceAround, // Align horizontally
-          //           children: [
-          //               HomePage(),
-          //               HomePage(),
-          //           ]
-          //       ),
-          //     ],
-          //   ),
+          body: GridView.count(
+            crossAxisCount: 2,
+            mainAxisSpacing: 0,
+            crossAxisSpacing: 0,
+            children: List.generate(20, (index) {
+              return HomePage(index: index);
+            }),
           ),
-        );
+        ),
+  );
 }
 
 class HomePage extends StatefulWidget {
