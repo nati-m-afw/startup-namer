@@ -3,7 +3,7 @@ import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
 
 void main() {
-  debugPaintSizeEnabled = true;
+  // debugPaintSizeEnabled = true;
   WidgetsFlutterBinding.ensureInitialized();
   SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
     statusBarColor: Colors.deepOrangeAccent, // transparent status bar
@@ -27,8 +27,9 @@ class MyApp extends StatelessWidget {
           appBar: AppBar(
             title: Text('Still runnin....'),
           ),
-          body: ListView.builder(
+          body: ListView.separated(
             itemCount: 10,
+            separatorBuilder: (context, index) => Divider(height: 70, thickness: 10, color: Colors.deepOrangeAccent,),
             itemBuilder: (context, index) {
               return HomePage(index: index,);
             },
