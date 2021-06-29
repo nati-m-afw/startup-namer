@@ -30,23 +30,19 @@ class MyApp extends StatelessWidget {
           body: Column(
             // alignment: Alignment.center,
             // padding: EdgeInsets.fromLTRB(0,30,0,0),
-            mainAxisAlignment: MainAxisAlignment.center, // Align vertically
+            mainAxisAlignment: MainAxisAlignment.spaceAround, // Align vertically
             children:  [
                 Row(
-                    mainAxisAlignment: MainAxisAlignment.center, // Align horizontally
-                    // padding: EdgeInsets.all(10.0),
+                    mainAxisAlignment: MainAxisAlignment.spaceAround, // Align horizontally
                     children: [
                         HomePage(),
-                        SizedBox(height: 40, width: 40),
                         HomePage(),
                     ]
                 ),
-                SizedBox(height: 40, width: 40,),
                 Row(
-                    mainAxisAlignment: MainAxisAlignment.center, // Align horizontally
+                    mainAxisAlignment: MainAxisAlignment.spaceAround, // Align horizontally
                     children: [
                         HomePage(),
-                        SizedBox(height: 40, width: 40,),
                         HomePage(),
                     ]
                 ),
