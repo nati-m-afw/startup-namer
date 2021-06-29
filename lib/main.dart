@@ -27,31 +27,33 @@ class MyApp extends StatelessWidget {
           appBar: AppBar(
             title: Text('Still runnin....'),
           ),
-          body: Center(
+          body: Column(
             // alignment: Alignment.center,
             // padding: EdgeInsets.fromLTRB(0,30,0,0),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center, // Align vertically
-              children: [
+            mainAxisAlignment: MainAxisAlignment.center, // Align vertically
+            children:  [
                 Row(
                     mainAxisAlignment: MainAxisAlignment.center, // Align horizontally
+                    // padding: EdgeInsets.all(10.0),
                     children: [
                         HomePage(),
+                        SizedBox(height: 40, width: 40),
                         HomePage(),
                     ]
                 ),
+                SizedBox(height: 40, width: 40,),
                 Row(
                     mainAxisAlignment: MainAxisAlignment.center, // Align horizontally
                     children: [
                         HomePage(),
+                        SizedBox(height: 40, width: 40,),
                         HomePage(),
                     ]
                 ),
               ],
             ),
           ),
-        ),
-      );
+        );
 }
 
 class HomePage extends StatefulWidget {
