@@ -27,32 +27,40 @@ class MyApp extends StatelessWidget {
           appBar: AppBar(
             title: Text('Still runnin....'),
           ),
-          body: Column(
-            // alignment: Alignment.center,
-            // padding: EdgeInsets.fromLTRB(0,30,0,0),
-            mainAxisAlignment: MainAxisAlignment.spaceAround, // Align vertically
-            children:  [
-                Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround, // Align horizontally
-                    children: [
-                        HomePage(),
-                        HomePage(),
-                    ]
-                ),
-                Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround, // Align horizontally
-                    children: [
-                        HomePage(),
-                        HomePage(),
-                    ]
-                ),
-              ],
-            ),
+          body: ListView.builder(
+            itemCount: 10,
+            itemBuilder: (context, index) {
+              return HomePage(index: index,);
+            },
+          )
+          // Column(
+          //   mainAxisAlignment: MainAxisAlignment.spaceAround, // Align vertically
+          //   children:  [
+          //       Row(
+          //           mainAxisAlignment: MainAxisAlignment.spaceAround, // Align horizontally
+          //           children: [
+          //               HomePage(),
+          //               HomePage(),
+          //           ]
+          //       ),
+          //       Row(
+          //           mainAxisAlignment: MainAxisAlignment.spaceAround, // Align horizontally
+          //           children: [
+          //               HomePage(),
+          //               HomePage(),
+          //           ]
+          //       ),
+          //     ],
+          //   ),
           ),
         );
 }
 
 class HomePage extends StatefulWidget {
+  int index;
+
+  HomePage({required this.index});
+
   @override
   State<StatefulWidget> createState() {
     return _CounterState();
@@ -73,6 +81,7 @@ class _CounterState extends State<HomePage> {
     return Center(
       child: Column(
         children: [
+          Text('Build Number: ${widget.index}'),
           Text('$_counter'),
           ElevatedButton(onPressed: _increment, child: Icon(Icons.add))
         ],
