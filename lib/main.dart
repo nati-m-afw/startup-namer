@@ -1,14 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
+import 'movies..dart';
 
 void main() {
   // debugPaintSizeEnabled = true;
   WidgetsFlutterBinding.ensureInitialized();
   SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
-    statusBarColor: Colors.deepOrangeAccent, // transparent status bar
+    statusBarIconBrightness: Brightness.light,
+    statusBarColor: Colors.deepOrangeAccent, // transparent status
   ));
   // WidgetsApp.showPerformanceOverlayOverride=true;
+  Movies();
   runApp(MyApp());
 }
 
