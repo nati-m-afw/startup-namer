@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'movies..dart';
 
 void main() {
@@ -11,11 +12,14 @@ void main() {
     statusBarColor: Colors.deepOrangeAccent, // transparent status
   ));
   // WidgetsApp.showPerformanceOverlayOverride=true;
-  Movies();
-  runApp(MyApp());
+  runApp(MyApp(movies: Movies().getTrending()));
 }
 
 class MyApp extends StatelessWidget {
+  final Future<List<Movie>>? movies;
+
+  MyApp({Key? key, this.movies}) : super(key: key);
+
   @override
   Widget build(BuildContext context) => MaterialApp(
         debugShowCheckedModeBanner: false,
@@ -30,46 +34,43 @@ class MyApp extends StatelessWidget {
           appBar: AppBar(
             title: Text('Still runnin....'),
           ),
-          body: GridView.count(
-            crossAxisCount: 2,
-            mainAxisSpacing: 0,
-            crossAxisSpacing: 0,
-            children: List.generate(20, (index) {
-              return HomePage(index: index);
-            }),
-          ),
+          body: FutureBuilder<List<Movie>> (
+            future: movies,
+            builder: (context, snapshot) {
+              if (snapshot.connectionState == ConnectionState.done) {
+                return StaggeredGridView.countBuilder(
+                    crossAxisCount: 2,
+                    mainAxisSpacing: 0,
+                    crossAxisSpacing: 30,
+                    staggeredTileBuilder: (index) {
+                      return StaggeredTile.count(1, 2);
+                    },
+                    itemCount: 20,
+                    itemBuilder: (context, index) {
+                      return MovieWidget(movie: snapshot.data![index]);
+                    },
+                );
+              } else {
+                return CircularProgressIndicator();
+              };
+            }
+          )
         ),
   );
 }
 
-class HomePage extends StatefulWidget {
-  int index;
+class MovieWidget extends StatelessWidget {
+  final Movie movie;
 
-  HomePage({required this.index});
-
-  @override
-  State<StatefulWidget> createState() {
-    return _CounterState();
-  }
-}
-
-class _CounterState extends State<HomePage> {
-  int _counter = 0;
-
-  void _increment() {
-    setState(() {
-      this._counter++;
-    });
-  }
+  MovieWidget({required this.movie});
 
   @override
   Widget build(BuildContext context) {
     return Center(
       child: Column(
         children: [
-          Text('Build Number: ${widget.index}'),
-          Text('$_counter'),
-          ElevatedButton(onPressed: _increment, child: Icon(Icons.add))
+          Image.network(movie.posterPath!),
+          Text(movie.title!),
         ],
       ),
     );

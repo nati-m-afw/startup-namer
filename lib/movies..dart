@@ -14,7 +14,7 @@ class Movies {
     getTrending();
   }
 
-  void getTrending() async{
+  Future<List<Movie>> getTrending() async{
     Uri url = Uri.parse(_baseURL + "/trending/all/week?api_key=" + _apiKey + "&page=" + _page.toString());
     final response = await http.get(url);
 
@@ -23,7 +23,7 @@ class Movies {
       for (var movie in json.decode(response.body)['results']) {
         _currentList.add(Movie.fromJson(movie));
       }
-      print(_currentList[1].title);
+      return _currentList;
     } else {
       throw Exception("Failed to load movies");
     }
@@ -44,7 +44,7 @@ class Movie {
     return Movie(
       id: json['id'],
       title: json['original_title'],
-      posterPath: json['poster_path'],
+      posterPath: "https://image.tmdb.org/t/p/original" + json['poster_path'],
       rating: json['vote_average'],
       overview: json['overview'],
       releaseDate: json['release_date']
