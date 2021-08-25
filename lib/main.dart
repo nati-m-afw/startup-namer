@@ -1,17 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'movies..dart';
 
-void main() {
+Future main() async{
   // debugPaintSizeEnabled = true;
   WidgetsFlutterBinding.ensureInitialized();
   SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
     statusBarIconBrightness: Brightness.light,
-    statusBarColor: Colors.deepOrangeAccent, // transparent status
+    statusBarColor: Colors.deepOrangeAccent.withOpacity(1), // transparent status
   ));
   // WidgetsApp.showPerformanceOverlayOverride=true;
+  await dotenv.load(fileName: ".env");
   runApp(MyApp(movies: Movies().getTrending()));
 }
 
@@ -50,9 +52,8 @@ class MyApp extends StatelessWidget {
                       return MovieWidget(movie: snapshot.data![index]);
                     },
                 );
-              } else {
-                return CircularProgressIndicator();
-              };
+              }
+              return CircularProgressIndicator();
             }
           )
         ),

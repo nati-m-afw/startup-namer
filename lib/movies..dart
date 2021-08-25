@@ -1,21 +1,23 @@
 import 'dart:convert';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:http/http.dart' as http;
 
 class Movies {
   String _baseURL = "https://api.themoviedb.org/3";
-  String _apiKey = "5aeaac54dd8d304148807c8553c0a9ca";
+  String? _apiKey = dotenv.env["API_KEY"];
   List<Movie> _currentList = [];
   int _page = 1;
-  static final Movies _instance = Movies._internal();
+  static final Movies _instance = Movies._internal(); // Class Data
 
   factory Movies ()=> _instance;
 
+  // _internal() is a private constructor
   Movies._internal() {
     getTrending();
   }
 
   Future<List<Movie>> getTrending() async{
-    Uri url = Uri.parse(_baseURL + "/trending/all/week?api_key=" + _apiKey + "&page=" + _page.toString());
+    Uri url = Uri.parse(_baseURL + "/trending/all/week?api_key=" + _apiKey! + "&page=" + _page.toString());
     final response = await http.get(url);
 
     if (response.statusCode == 200){
